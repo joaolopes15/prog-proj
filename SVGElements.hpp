@@ -38,5 +38,19 @@ namespace svg
         Point center;
         Point radius;
     };
+    
+    /*############################################################################################################
+    Implementação da classe Rectangle (LM)*/
+    class Rectangle : public SVGElement{
+        public:
+        Rectangle(const Point &upperL, const int width, const int height, const Color &fill);
+        void draw(PNGImage &img) const override;
+
+    private:
+        Color fill;
+        int width;
+        int height;
+        Point upperL;
+    };
 }
 #endif
