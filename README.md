@@ -3,7 +3,7 @@
 ## Group elements
 
 - up202307809 João Miguel Lopes
-- upXXXXX Name of element 2
+- up202303772 Leonor Alexandra Grilo Matias
 - upXXXXX Name of element 3
 
 
