@@ -4,7 +4,7 @@
 
 - up202307809 João Miguel Lopes
 - up202303772 Leonor Alexandra Grilo Matias
-- upXXXXX Name of element 3
+- up202305264 Ana Margarida da Costa Ribeiro
 
 
 ## Accomplished tasks
