@@ -52,5 +52,15 @@ namespace svg
         int height;
         Point upperL;
     };
+    //Implementação da classe Polygon (LM)
+    class Polygon : public SVGElement{
+        public:
+        Polygon(const Point point_pol, const Color &fill);
+        void draw(PNGImage &image) const override;
+    private:
+        Color fill;
+        Point point_pol;
+    };
+    //Implementação da classe Line (LM)
 }
 #endif
