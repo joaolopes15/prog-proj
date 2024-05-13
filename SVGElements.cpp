@@ -46,11 +46,11 @@ namespace svg
     Circle::Circle(const Color &fill,
                     const Point &center,
                     const int &radius)
-        : fill(fill), center(center), radius(radius) 
+        : Ellipse(fill, center, {radius, radius})
     {
     }
     void Circle::draw(PNGImage &img) const
     {
-        img.draw_ellipse(center, radius, fill);
+        //img.draw_ellipse(center, radius, fill);
     }
 }

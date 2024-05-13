@@ -57,7 +57,7 @@ namespace svg
         public:
         Rectangle(const Point &upperL, const int width, const int height, const Color &fill);
         void draw(PNGImage &img) const override;
-
+ 
     private:
         Color fill;
         int width;
