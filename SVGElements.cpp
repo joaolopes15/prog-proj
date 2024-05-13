@@ -17,6 +17,7 @@ namespace svg
     {
         img.draw_ellipse(center, radius, fill);
     }
+    //############################################################################################################
     // @todo provide the implementation of SVGElement derived classes
     // HERE -->
         //Retângulo (LM)
@@ -31,6 +32,7 @@ namespace svg
     { //não existe draw_rectangle; UNFINISHED (LM)
         //img.draw_polygon(upperL, width, height, fill);
     }
+    //############################################################################################################
         //Polígono (LM)
     Polygon::Polygon(const Point point_pol, 
                      const Color &fill)

@@ -61,6 +61,6 @@ namespace svg
         Color fill;
         Point point_pol;
     };
-    //Implementação da classe Line (LM)
+
+#endif;
 }
-#endif
