@@ -20,7 +20,7 @@ namespace svg
     //############################################################################################################
     // @todo provide the implementation of SVGElement derived classes
     // HERE -->
-        //Retângulo (LM)
+            //Retângulo (LM)
     Rectangle::Rectangle(const Point &upperL, 
                          const int width,
                          const int height,
@@ -45,4 +45,25 @@ namespace svg
             img.draw_polygon(points, fill);
         }
     
-}
+    Circle::Circle(const Color &fill,
+                    const Point &center,
+                    const int &radius)
+        : Ellipse(fill, center, {radius, radius})
+    {
+    }
+    void Circle::draw(PNGImage &img) const
+    {
+        //img.draw_ellipse(center, radius, fill);
+    }
+    Line::Line(double x1, double y1, double x2, double y2, const std::string& stroke): x1(x1), y1 (y1), x2(x2), y2(y2), stroke(stroke){}
+    Line::~Line() {}
+
+    void Line::draw(PNGImage& image)const {
+        image.drawLine(x1, y1, x2, y2, stroke);
+    }
+    Polyline::Polyline(const std::vector<Point>& points, const std::string& stroke):points(points), stroke(stroke){}
+    Polyline::~Polyline(){}
+    void Polyline::draw(PNGImage& image) const {
+        for (size_t i= 0; i <points.size() -1; ++i) {
+            image.drawLine(points[i].x, points.y, points[i+1].x, points[i+1].y, stroke);
+        }
