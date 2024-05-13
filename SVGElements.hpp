@@ -5,6 +5,7 @@
 #include "Color.hpp"
 #include "Point.hpp"
 #include "PNGImage.hpp"
+#include <vector>
 
 namespace svg
 {
@@ -74,5 +75,24 @@ namespace svg
         Point point_pol;
     };
     //Implementação da classe Line (LM)
+    class Line: public SVGElement {
+        public: 
+        Line(double x1, double y1, double x2, double y2, const std::string& stroke);
+        virtual ~Line();
+        virtual void draw(PNGImage& image) const;
+    private:
+        double x1, y1, x2, y2;
+        std::string stroke;
+    };
+    //Implementação da classe Polyline (LM)
+    class Polyline: public SVGElement {
+        public: 
+        Polyline(const std::vector<Point>& points, const std::string& stroke);
+        virtual ~Polyline();
+        virtual void draw(PNGImage& image) const;
+    private:
+        std::vector<Point> points;
+        std::string stroke;
+    };
 }
 #endif
