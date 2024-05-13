@@ -5,7 +5,7 @@
 #include "Color.hpp"
 #include "Point.hpp"
 #include "PNGImage.hpp"
-#include <vector>
+#include<vector> //usado (pelo menos) na classe Polygon
 
 namespace svg
 {
@@ -52,9 +52,20 @@ namespace svg
         int radius;
     };
     
-    /*############################################################################################################
-    Implementação da classe Rectangle (LM)*/
-    class Rectangle : public SVGElement{
+    //############################################################################################################
+    //Implementação da classe Polygon (LM)
+    class Polygon : public SVGElement{
+        public:
+        //Polygon(const Point point_pol, const Color &fill);
+        Polygon(const std::vector <Point> all_points, const Color &fill);
+        void draw(PNGImage &image) const override;
+    private:
+        Color fill;
+        Point point_pol;
+    };
+
+    //Implementação da classe Rectangle (classe derivada de polygon)(LM)
+    class Rectangle : Polygon{ 
         public:
         Rectangle(const Point &upperL, const int width, const int height, const Color &fill);
         void draw(PNGImage &img) const override;
