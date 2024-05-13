@@ -56,16 +56,15 @@ namespace svg
     //Implementação da classe Polygon (LM)
     class Polygon : public SVGElement{
         public:
-        //Polygon(const Point point_pol, const Color &fill);
         Polygon(const std::vector <Point> all_points, const Color &fill);
         void draw(PNGImage &image) const override;
     private:
         Color fill;
-        Point point_pol;
+        std::vector <Point> all_points;
     };
 
     //Implementação da classe Rectangle (classe derivada de polygon)(LM)
-    class Rectangle : Polygon{ 
+    class Rectangle : public Polygon{ 
         public:
         Rectangle(const Point &upperL, const int width, const int height, const Color &fill);
         void draw(PNGImage &img) const override;
@@ -75,15 +74,6 @@ namespace svg
         int width;
         int height;
         Point upperL;
-    };
-    //Implementação da classe Polygon (LM)
-    class Polygon : public SVGElement{
-        public:
-        Polygon(const Point point_pol, const Color &fill);
-        void draw(PNGImage &image) const override;
-    private:
-        Color fill;
-        Point point_pol;
     };
     //Implementação da classe Line 
     class Line: public SVGElement {

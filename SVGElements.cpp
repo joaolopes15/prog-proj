@@ -34,15 +34,14 @@ namespace svg
     }
     //############################################################################################################
         //Polígono (LM)
-    Polygon::Polygon(const Point point_pol, 
-                     const Color &fill)
-        : fill(fill), point_pol(point_pol)
+    Polygon::Polygon(std::vector <svg::Point> all_points,
+                     const svg::Color &fill)
+                : fill(fill), all_points(all_points)
     {    
     }
     void Polygon::draw(PNGImage &img) const 
         {
-            std::vector<svg::Point> points = {point_pol}; //vetor para armazenar os pontos do polígono
-            img.draw_polygon(points, fill);
+            img.draw_polygon(all_points, fill);
         }
     
     Circle::Circle(const Color &fill,
