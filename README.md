@@ -3,8 +3,8 @@
 ## Group elements
 
 - up202307809 João Miguel Lopes
-- upXXXXX Name of element 2
-- upXXXXX Name of element 3
+- up202303772 Leonor Alexandra Grilo Matias
+- up202305264 Ana Margarida da Costa Ribeiro
 
 
 ## Accomplished tasks

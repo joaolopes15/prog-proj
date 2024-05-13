@@ -19,6 +19,29 @@ namespace svg
     }
     // @todo provide the implementation of SVGElement derived classes
     // HERE -->
+            //Retângulo (LM)
+    Rectangle::Rectangle(const Point &upperL, 
+                         const int width,
+                         const int height,
+                         const Color &fill )
+        : fill(fill), width(width), height(height), upperL(upperL)
+    {
+    }
+    void Rectangle::draw(PNGImage &img) const
+    { //não existe draw_rectangle; UNFINISHED (LM)
+        //img.draw_polygon(upperL, width, height, fill);
+    }
+        //Polígono (LM)
+    Polygon::Polygon(const Point point_pol, 
+                     const Color &fill)
+        : fill(fill), point_pol(point_pol)
+    {    
+    }
+    void Polygon::draw(PNGImage &img) const 
+        {
+            std::vector<svg::Point> points = {point_pol}; //vetor para armazenar os pontos do polígono
+            img.draw_polygon(points, fill);
+        }
     
     Circle::Circle(const Color &fill,
                     const Point &center,
