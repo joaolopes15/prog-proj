@@ -25,14 +25,19 @@ namespace svg
                          const int width,
                          const int height,
                          const Color &fill )
-        : Polygon({upperL, {upperL.x + width, upperL.y}, {upperL.x, upperL.y - height}, {upperL.x + width, upperL.y - height}}, fill),
+        : Polygon({upperL, 
+                  {upperL.x + width, upperL.y}, 
+                  {upperL.x, upperL.y - height}, 
+                  {upperL.x + width, upperL.y - height}},
+                   fill),
       fill(fill), width(width), height(height), upperL(upperL) 
       {}
-    void Rectangle::draw(PNGImage &img) const
-    { img.draw_polygon(get_rect_coordinates(), fill);
-    }
+    void Rectangle::draw(PNGImage &img) const {
+    std::vector<Point> rectPoints = get_rect_coordinates();
+    img.draw_polygon(rectPoints, fill); 
+}
     //############################################################################################################
-        //Polígono (LM)
+            //Polígono (LM)
     Polygon::Polygon(std::vector <svg::Point> all_points,
                      const svg::Color &fill)
                 : fill(fill), all_points(all_points)
@@ -42,7 +47,8 @@ namespace svg
         {
             img.draw_polygon(all_points, fill);
         }
-    
+        
+            //Circulo
     Circle::Circle(const Color &fill,
                     const Point &center,
                     const int &radius)
@@ -65,3 +71,4 @@ namespace svg
         for (size_t i= 0; i <points.size() -1; ++i) {
             image.drawLine(points[i].x, points.y, points[i+1].x, points[i+1].y, stroke);
         }
+}
