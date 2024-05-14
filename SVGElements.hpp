@@ -58,6 +58,7 @@ namespace svg
     public:
         Polygon(const std::vector<Point> &all_points, const Color &fill);
         void draw(PNGImage &image) const override;
+        void translate(int x,int y) const;
 
     private:
         Color fill;

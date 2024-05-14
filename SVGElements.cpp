@@ -63,6 +63,11 @@ namespace svg
     void Polygon::draw(PNGImage &img) const {
         img.draw_polygon(all_points, fill);
     }   
+    void Polygon::translate(int x,int y) const{
+        for(int i = 0; i < all_points.size(); i++){
+            all_points[i].translate({x,y});
+        }
+    }
 
     //Polylinha (LM)
     Polyline::Polyline(const std::vector<Point> &polyl_points, const Color &stroke)
