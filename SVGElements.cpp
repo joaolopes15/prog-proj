@@ -33,8 +33,8 @@ namespace svg
     //  HERE -->
     // Retângulo (LM)
     Rectangle::Rectangle(const Point &upperL,
-                         const int width,
-                         const int height,
+                         const int &width,
+                         const int &height,
                          const Color &fill)
         : Polygon({upperL,
                    {upperL.x + width, upperL.y},
@@ -51,7 +51,7 @@ namespace svg
     }
     // ############################################################################################################
     // Polígono (LM)
-    Polygon::Polygon(std::vector<svg::Point> all_points,
+    Polygon::Polygon(const std::vector<svg::Point> &all_points,
                      const svg::Color &fill)
         : fill(fill), all_points(all_points)
     {

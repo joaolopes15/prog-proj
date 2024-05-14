@@ -52,7 +52,6 @@ namespace svg
         int radius;
     };
 
-    // ############################################################################################################
     // Implementação da classe Polygon (LM)
     class Polygon : public SVGElement
     {
@@ -96,6 +95,7 @@ namespace svg
     {
     public:
         Polyline(const std::vector<Point> &polyl_points, const Color &stroke);
+        
         void draw(PNGImage &img) const override;  
 
     private:
