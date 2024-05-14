@@ -25,12 +25,11 @@ namespace svg
                          const int width,
                          const int height,
                          const Color &fill )
-        : fill(fill), width(width), height(height), upperL(upperL)
-    {
-    }
+        : Polygon({upperL, {upperL.x + width, upperL.y}, {upperL.x, upperL.y - height}, {upperL.x + width, upperL.y - height}}, fill),
+      fill(fill), width(width), height(height), upperL(upperL) 
+      {}
     void Rectangle::draw(PNGImage &img) const
-    { //não existe draw_rectangle; UNFINISHED (LM)
-        //img.draw_polygon(upperL, width, height, fill);
+    { img.draw_polygon(get_rect_coordinates(), fill);
     }
     //############################################################################################################
         //Polígono (LM)

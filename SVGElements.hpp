@@ -67,14 +67,25 @@ namespace svg
     class Rectangle : public Polygon{ 
         public:
         Rectangle(const Point &upperL, const int width, const int height, const Color &fill);
+
         void draw(PNGImage &img) const override;
- 
-    private:
-        Color fill;
-        int width;
-        int height;
-        Point upperL;
+
+        //função que dá return do vetor all_rect_points - necessário neste formato p/ draw_polygon
+        std::vector<Point> get_rect_coordinates() const { 
+        std::vector<Point> all_rect_points;
+        all_rect_points.push_back(upperL); // Upper Left
+        all_rect_points.emplace_back(upperL.x + width, upperL.y); // Upper Right
+        all_rect_points.emplace_back(upperL.x, upperL.y - height); // Lower Left
+        all_rect_points.emplace_back(upperL.x + width, upperL.y - height); // Lower Right
+        return all_rect_points;}
+
+        private:
+            Color fill;
+            int width;
+            int height;
+            Point upperL;
     };
+
     //Implementação da classe Line 
     class Line: public SVGElement {
         public: 
