@@ -102,18 +102,17 @@ namespace svg
     private:
         double x1, y1, x2, y2;
         std::string stroke;
-    };
+    };*/
     // Implementação da classe Polyline
     class Polyline : public SVGElement
     {
     public:
-        Polyline(const std::vector<Point> &points, const std::string &stroke);
-        virtual ~Polyline();
-        virtual void draw(PNGImage &image) const;
+        Polyline(const std::vector<Point> polyl_points, const Color stroke);
+        void draw(PNGImage &img) const override;  
 
     private:
-        std::vector<Point> points;
-        std::string stroke;
-    }; */
+        std::vector<Point> polyl_points;
+        Color stroke;
+    };
 }
 #endif
