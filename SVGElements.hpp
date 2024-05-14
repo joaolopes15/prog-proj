@@ -73,15 +73,7 @@ namespace svg
         void draw(PNGImage &img) const override;
 
         // função que dá return do vetor all_rect_points - necessário neste formato p/ draw_polygon
-        std::vector<Point> get_rect_coordinates() const
-        {
-            std::vector<Point> all_rect_points;
-            all_rect_points.push_back(upperL);                                 // Upper Left
-            all_rect_points.push_back({upperL.x + width, upperL.y});          // Upper Right
-            all_rect_points.push_back({upperL.x, upperL.y - height});         // Lower Left
-            all_rect_points.push_back({upperL.x + width, upperL.y - height}); // Lower Right
-            return all_rect_points;
-        }
+        std::vector<Point> get_rect_coordinates() const;
 
     private:
         Color fill;

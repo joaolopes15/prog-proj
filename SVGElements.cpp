@@ -36,18 +36,22 @@ namespace svg
                          const int &width,
                          const int &height,
                          const Color &fill)
-        : Polygon({upperL,
-                   {upperL.x + width, upperL.y},
-                   {upperL.x, upperL.y - height},
-                   {upperL.x + width, upperL.y - height}},
-                  fill),
+                : Polygon(get_rect_coordinates(), fill),
           fill(fill), width(width), height(height), upperL(upperL)
     {
     }
-    void Rectangle::draw(PNGImage &img) const
-    {
-        std::vector<Point> rectPoints = get_rect_coordinates();
-        img.draw_polygon(rectPoints, fill);
+    void Rectangle::draw(PNGImage &img) const {
+            std::vector<Point> rectPoints = get_rect_coordinates();
+            img.draw_polygon(rectPoints, fill);   
+    }
+
+    std::vector<Point> Rectangle::get_rect_coordinates() const {
+            std::vector<Point> all_rect_points;
+            all_rect_points.push_back(upperL);                                 // Upper Left
+            all_rect_points.push_back({upperL.x + width, upperL.y});          // Upper Right
+            all_rect_points.push_back({upperL.x, upperL.y - height});         // Lower Left
+            all_rect_points.push_back({upperL.x + width, upperL.y - height}); // Lower Right
+            return all_rect_points;
     }
     // ############################################################################################################
     // Polígono (LM)
@@ -56,8 +60,7 @@ namespace svg
         : fill(fill), all_points(all_points)
     {
     }
-    void Polygon::draw(PNGImage &img) const
-    {
+    void Polygon::draw(PNGImage &img) const {
         img.draw_polygon(all_points, fill);
     }   
     /* Line::Line(double x1, double y1, double x2, double y2, const std::string &stroke) : x1(x1), y1(y1), x2(x2), y2(y2), stroke(stroke) {}
