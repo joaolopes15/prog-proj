@@ -63,20 +63,25 @@ namespace svg
     void Polygon::draw(PNGImage &img) const {
         img.draw_polygon(all_points, fill);
     }   
-    /* Line::Line(double x1, double y1, double x2, double y2, const std::string &stroke) : x1(x1), y1(y1), x2(x2), y2(y2), stroke(stroke) {}
-    Line::~Line() {}
 
-    void Line::draw(PNGImage &image) const
+    //Polylinha (LM)
+    Polyline::Polyline(const std::vector<Point> &polyl_points, const Color &stroke)
+            :polyl_points(polyl_points),stroke(stroke)
     {
-        // image.drawLine(x1, y1, x2, y2, stroke);
     }
-    Polyline::Polyline(const std::vector<Point> &points, const std::string &stroke) : points(points), stroke(stroke) {}
-    Polyline::~Polyline() {}
-    void Polyline::draw(PNGImage &image) const
-    {
-        for (size_t i = 0; i < points.size() - 1; ++i)
-        {
-            // image.drawLine(points[i].x, points.y, points[i+1].x, points[i+1].y, stroke);
+    void Polyline::draw(PNGImage &img) const {
+        for (int i = 0; i<polyl_points.size() - 1; i++){
+            img.draw_line(polyl_points[i], polyl_points[i+1], stroke);
         }
-    } */
+    }
+
+    //Linha (LM)
+    Line::Line(const Point &start, const Point &end, const Color &stroke)
+        :Polyline({start,end},stroke),
+        start(start),end(end),stroke(stroke)
+    {
+    }
+    void Line::draw(PNGImage &img) const {
+        img.draw_line(start,end,stroke);
+    }   
 }
