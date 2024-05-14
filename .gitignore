@@ -30,6 +30,9 @@
 *.exe
 *.out
 *.app
+svgtopng
+test
+xmldump
 
 # Visual Studio Code
 .vscode/
