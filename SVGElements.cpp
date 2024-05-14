@@ -17,6 +17,17 @@ namespace svg
     {
         img.draw_ellipse(center, radius, fill);
     }
+    //circle
+    Circle::Circle(const Color &fill,
+                   const Point &center,
+                   const int &radius)
+        : Ellipse(fill, center, {radius, radius})
+    {
+    }
+    void Circle::draw(PNGImage &img) const
+    {
+        img.draw_ellipse(center, {radius, radius}, fill);
+    }
     // ############################################################################################################
     //  @todo provide the implementation of SVGElement derived classes
     //  HERE -->
@@ -48,19 +59,7 @@ namespace svg
     void Polygon::draw(PNGImage &img) const
     {
         img.draw_polygon(all_points, fill);
-    }
-
-    // Circulo
-    Circle::Circle(const Color &fill,
-                   const Point &center,
-                   const int &radius)
-        : Ellipse(fill, center, {radius, radius})
-    {
-    }
-    void Circle::draw(PNGImage &img) const
-    {
-       // img.draw_ellipse(center, radius, fill);
-    }
+    }   
     /* Line::Line(double x1, double y1, double x2, double y2, const std::string &stroke) : x1(x1), y1(y1), x2(x2), y2(y2), stroke(stroke) {}
     Line::~Line() {}
 
