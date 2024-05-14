@@ -57,7 +57,7 @@ namespace svg
     class Polygon : public SVGElement
     {
     public:
-        Polygon(const std::vector<Point> all_points, const Color &fill);
+        Polygon(const std::vector<Point> &all_points, const Color &fill);
         void draw(PNGImage &image) const override;
 
     private:
@@ -69,7 +69,7 @@ namespace svg
     class Rectangle : public Polygon
     {
     public:
-        Rectangle(const Point &upperL, const int width, const int height, const Color &fill);
+        Rectangle(const Point &upperL, const int &width, const int &height, const Color &fill);
 
         void draw(PNGImage &img) const override;
 
@@ -90,28 +90,28 @@ namespace svg
         int height;
         Point upperL;
     };
-
-    // Implementação da classe Line
-    /* class Line : public SVGElement
-    {
-    public:
-        Line(double x1, double y1, double x2, double y2, const std::string &stroke);
-        virtual ~Line();
-        virtual void draw(PNGImage &image) const;
-
-    private:
-        double x1, y1, x2, y2;
-        std::string stroke;
-    };*/
+    
     // Implementação da classe Polyline
     class Polyline : public SVGElement
     {
     public:
-        Polyline(const std::vector<Point> polyl_points, const Color stroke);
+        Polyline(const std::vector<Point> &polyl_points, const Color &stroke);
         void draw(PNGImage &img) const override;  
 
     private:
         std::vector<Point> polyl_points;
+        Color stroke;
+    };
+    //Implementação da classe Line (classe derivada de Polyline)(LM)
+    class Line : public Polyline
+    {
+    public:
+        Line(const Point &start, const Point &end, const Color &stroke);
+        void draw(PNGImage &img) const override;
+
+    private:
+        Point start;
+        Point end;
         Color stroke;
     };
 }
