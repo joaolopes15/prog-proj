@@ -72,17 +72,17 @@ namespace svg
         img.draw_polygon(all_points, fill);
     }   
     void Polygon::translate(int x,int y) const{
-        for(size_t i = 0; i < all_points.size(); i++){
+        for(int i = 0; i < int(all_points.size()); i++){
             all_points[i].translate({x,y});
         }
     }
     void Polygon::rotate(const Point &origin, int &angle) const{
-        for(size_t i = 0; i < all_points.size(); i++){
+        for(int i = 0; i < int(all_points.size()); i++){
             all_points[i].rotate(origin,angle);
         }
     }
     void Polygon::scale(const Point &origin, int &factor) const{
-        for(size_t i = 0; i < all_points.size(); i++){
+        for(int i = 0; i < int(all_points.size()); i++){
             all_points[i].scale(origin,factor);
         }
     }
@@ -93,17 +93,17 @@ namespace svg
     {
     }
     void Polyline::draw(PNGImage &img) const {
-        for (size_t i = 0; i<polyl_points.size() - 1; i++){
+        for (int i = 0; i<int(polyl_points.size()) - 1; i++){
             img.draw_line(polyl_points[i], polyl_points[i+1], stroke);
         }
     }
     void Polyline::translate(int x, int y) const {
-        for (size_t i = 0; i<polyl_points.size() - 1; i++){
+        for (int i = 0; i<int(polyl_points.size()) - 1; i++){
         polyl_points[i].translate({x,y});   
         }
     }
     void Polyline::rotate(const Point &origin, int &angle) const {
-        for (size_t i = 0; i<polyl_points.size() - 1; i++){
+        for (int i = 0; i<int(polyl_points.size()) - 1; i++){
         polyl_points[i].rotate(origin,angle);   
         }
     }
