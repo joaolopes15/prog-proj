@@ -21,7 +21,7 @@ namespace svg
         dimensions.x = xml_elem->IntAttribute("width");
         dimensions.y = xml_elem->IntAttribute("height");
         
-        /* XMLElement *child_elem = xml_elem->FirstChildElement();
+        XMLElement *child_elem = xml_elem->FirstChildElement();
         while (child_elem != nullptr)
         {
             const char *elem_name = child_elem->Value();
@@ -32,7 +32,7 @@ namespace svg
             int width = child_elem->IntAttribute("width");
             int height = child_elem->IntAttribute("height");
             string fill = child_elem->Attribute("fill");
-            SVGElement *rect = new Rectangle(x, y, width, height, parse_color(fill));
+            SVGElement *rect = new Rectangle({x, y}, width, height, parse_color(fill));
             svg_elements.push_back(rect);
             }
             else if (strcmp(elem_name, "circle") == 0)
@@ -41,7 +41,7 @@ namespace svg
             int cy = child_elem->IntAttribute("cy");
             int r = child_elem->IntAttribute("r");
             string fill = child_elem->Attribute("fill");
-            SVGElement *circle = new Circle(cx, cy, r, parse_color(fill));
+            SVGElement *circle = new Circle(parse_color(fill), {cx, cy}, r);
             svg_elements.push_back(circle);
             }
             else if (strcmp(elem_name, "line") == 0)
@@ -51,14 +51,15 @@ namespace svg
             int x2 = child_elem->IntAttribute("x2");
             int y2 = child_elem->IntAttribute("y2");
             string stroke = child_elem->Attribute("stroke");
-            SVGElement *line = new Line(x1, y1, x2, y2, parse_color(stroke));
+            SVGElement *line = new Line({x1, y1}, {x2, y2}, parse_color(stroke));
             svg_elements.push_back(line);
             }
             // Add more conditions for other SVG element types here
 
             child_elem = child_elem->NextSiblingElement();
-        } */
+        } 
         // TODO complete code -->
         
     }
 }
+
