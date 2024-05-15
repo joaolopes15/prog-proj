@@ -13,12 +13,15 @@ namespace svg
         : fill(fill), center(center), radius(radius)
     {
     }
-    void Ellipse::draw(PNGImage &img) const
-    {
+    void Ellipse::draw(PNGImage &img) const {
         img.draw_ellipse(center, radius, fill);
     }
+
     void Ellipse::translate(int x, int y) const {
         center.translate({x, y});
+    }
+    void Ellipse::rotate(const Point &center, int &angle) const {
+        center.rotate(center,angle);
     }
     //circle
     Circle::Circle(const Color &fill,
@@ -71,6 +74,11 @@ namespace svg
             all_points[i].translate({x,y});
         }
     }
+    void Polygon::rotate(const Point pnt, int &angle) const{
+        for(int i = 0; i < all_points.size(); i++){
+            all_points[i].rotate(all_points[i],angle);
+        }
+    }
 
     //Polylinha (LM)
     Polyline::Polyline(const std::vector<Point> &polyl_points, const Color &stroke)
@@ -87,6 +95,12 @@ namespace svg
         polyl_points[i].translate({x,y});   
         }
     }
+    void Polyline::rotate(const Point pnt, int &angle) const {
+        for (int i = 0; i<polyl_points.size() - 1; i++){
+        polyl_points[i].rotate(polyl_points[i],angle);   
+        }
+    }
+
 
     //Linha (LM)
     Line::Line(const Point &start, const Point &end, const Color &stroke)
