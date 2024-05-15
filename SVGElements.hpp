@@ -34,7 +34,8 @@ namespace svg
         Ellipse(const Color &fill, const Point &center, const Point &radius);
         void draw(PNGImage &img) const override;
         void translate(int x,int y) const;
-        void rotate(const Point &center, int &angle) const;
+        void rotate(const Point &origin, int &angle) const;
+        void scale(const Point &origin, int &factor) const;
 
     private:
         Color fill;
@@ -61,7 +62,8 @@ namespace svg
         Polygon(const std::vector<Point> &all_points, const Color &fill);
         void draw(PNGImage &image) const override;
         void translate(int x,int y) const; 
-        void rotate(const Point pnt, int &angle) const;
+        void rotate(const Point &origin, int &angle) const;
+        void scale(const Point &origin, int &factor) const;
 
     private:
         Color fill;
@@ -93,8 +95,13 @@ namespace svg
         Polyline(const std::vector<Point> &polyl_points, const Color &stroke);
         void draw(PNGImage &img) const override;
         void translate(int x,int y) const;  
-        void rotate(const Point pnt, int &angle) const;
-
+        void rotate(const Point &origin, int &angle) const;
+        //For polyline and line the scale transformation is supposed 
+        //to scale the thickness of drawn lines (stroke-width). 
+        //We will ignore this requirement. Instead, all lines will be 
+        //drawn in PNG format with a thickness of 1 pixel. 
+        // I think this means no scale function for lines and polylines, right? :D
+        
     private:
         std::vector<Point> polyl_points;
         Color stroke;

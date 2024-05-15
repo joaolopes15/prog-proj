@@ -16,12 +16,15 @@ namespace svg
     void Ellipse::draw(PNGImage &img) const {
         img.draw_ellipse(center, radius, fill);
     }
-
     void Ellipse::translate(int x, int y) const {
         center.translate({x, y});
     }
-    void Ellipse::rotate(const Point &center, int &angle) const {
-        center.rotate(center,angle);
+    void Ellipse::rotate(const Point &origin, int &angle) const {
+        center.rotate(origin,angle);
+    }
+    void Ellipse::scale(const Point &origin, int &factor) const {
+        center.scale(origin,factor); //not sure how an ellipse scales, bit confused 
+        radius.scale(origin,factor);
     }
     //circle
     Circle::Circle(const Color &fill,
@@ -50,7 +53,6 @@ namespace svg
             std::vector<Point> rectPoints = get_rect_coordinates();
             img.draw_polygon(rectPoints, fill);   
     }
-
     std::vector<Point> Rectangle::get_rect_coordinates() const {
             std::vector<Point> all_rect_points;
             all_rect_points.push_back(upperL);                                 // Upper Left
@@ -70,12 +72,12 @@ namespace svg
         img.draw_polygon(all_points, fill);
     }   
     void Polygon::translate(int x,int y) const{
-        for(int i = 0; i < int(all_points.size()); i++){
+        for(int i = 0; i < all_points.size(); i++){
             all_points[i].translate({x,y});
         }
     }
     void Polygon::rotate(const Point pnt, int &angle) const{
-        for(int i = 0; i < int(all_points.size()); i++){
+        for(int i = 0; i < all_points.size(); i++){
             all_points[i].rotate(all_points[i],angle);
         }
     }
@@ -86,17 +88,17 @@ namespace svg
     {
     }
     void Polyline::draw(PNGImage &img) const {
-        for (int i = 0; i < int(polyl_points.size()) - 1; i++){
+        for (int i = 0; i<polyl_points.size() - 1; i++){
             img.draw_line(polyl_points[i], polyl_points[i+1], stroke);
         }
     }
     void Polyline::translate(int x, int y) const {
-        for (int i = 0; i < int(polyl_points.size()) - 1; i++){
+        for (int i = 0; i<polyl_points.size() - 1; i++){
         polyl_points[i].translate({x,y});   
         }
     }
     void Polyline::rotate(const Point pnt, int &angle) const {
-        for (int i = 0; i < int(polyl_points.size()) - 1; i++){
+        for (int i = 0; i<polyl_points.size() - 1; i++){
         polyl_points[i].rotate(polyl_points[i],angle);   
         }
     }
