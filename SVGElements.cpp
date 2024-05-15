@@ -17,6 +17,9 @@ namespace svg
     {
         img.draw_ellipse(center, radius, fill);
     }
+    void Ellipse::translate(int x, int y) const {
+        center.translate({x, y});
+    }
     //circle
     Circle::Circle(const Color &fill,
                    const Point &center,
@@ -77,6 +80,11 @@ namespace svg
     void Polyline::draw(PNGImage &img) const {
         for (int i = 0; i<polyl_points.size() - 1; i++){
             img.draw_line(polyl_points[i], polyl_points[i+1], stroke);
+        }
+    }
+    void Polyline::translate(int x, int y) const {
+        for (int i = 0; i<polyl_points.size() - 1; i++){
+        polyl_points[i].translate({x,y});   
         }
     }
 

@@ -33,7 +33,7 @@ namespace svg
     public:
         Ellipse(const Color &fill, const Point &center, const Point &radius);
         void draw(PNGImage &img) const override;
-
+        void translate(int x,int y) const;
     private:
         Color fill;
         Point center;
@@ -88,7 +88,8 @@ namespace svg
     {
     public:
         Polyline(const std::vector<Point> &polyl_points, const Color &stroke);
-        void draw(PNGImage &img) const override;  
+        void draw(PNGImage &img) const override;
+        void translate(int x,int y) const;  
 
     private:
         std::vector<Point> polyl_points;
