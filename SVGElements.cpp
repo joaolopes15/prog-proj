@@ -16,12 +16,14 @@ namespace svg
     void Ellipse::draw(PNGImage &img) const {
         img.draw_ellipse(center, radius, fill);
     }
-
     void Ellipse::translate(int x, int y) const {
         center.translate({x, y});
     }
     void Ellipse::rotate(const Point &origin, int &angle) const {
         center.rotate(origin,angle);
+    }
+    void Ellipse::scale(const Point &origin, int &factor) const {
+        center.scale(origin,factor); //not sure how an ellipse scales, bit confused 
     }
     //circle
     Circle::Circle(const Color &fill,
@@ -50,7 +52,6 @@ namespace svg
             std::vector<Point> rectPoints = get_rect_coordinates();
             img.draw_polygon(rectPoints, fill);   
     }
-
     std::vector<Point> Rectangle::get_rect_coordinates() const {
             std::vector<Point> all_rect_points;
             all_rect_points.push_back(upperL);                                 // Upper Left
@@ -77,6 +78,11 @@ namespace svg
     void Polygon::rotate(const Point &origin, int &angle) const{
         for(int i = 0; i < all_points.size(); i++){
             all_points[i].rotate(origin,angle);
+        }
+    }
+    void Polygon::scale(const Point &origin, int &factor) const{
+        for(int i = 0; i < all_points.size(); i++){
+            all_points[i].scale(origin,factor);
         }
     }
 
