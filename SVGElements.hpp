@@ -34,7 +34,7 @@ namespace svg
         Ellipse(const Color &fill, const Point &center, const Point &radius);
         void draw(PNGImage &img) const override;
         void translate(int x,int y) const;
-        void rotate(const Point &center, int &angle) const;
+        void rotate(const Point &origin, int &angle) const;
 
     private:
         Color fill;
@@ -61,7 +61,7 @@ namespace svg
         Polygon(const std::vector<Point> &all_points, const Color &fill);
         void draw(PNGImage &image) const override;
         void translate(int x,int y) const; 
-        void rotate(const Point pnt, int &angle) const;
+        void rotate(const Point &origin, int &angle) const;
 
     private:
         Color fill;
@@ -93,7 +93,7 @@ namespace svg
         Polyline(const std::vector<Point> &polyl_points, const Color &stroke);
         void draw(PNGImage &img) const override;
         void translate(int x,int y) const;  
-        void rotate(const Point pnt, int &angle) const;
+        void rotate(const Point &origin, int &angle) const;
 
     private:
         std::vector<Point> polyl_points;

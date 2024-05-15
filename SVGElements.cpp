@@ -20,8 +20,8 @@ namespace svg
     void Ellipse::translate(int x, int y) const {
         center.translate({x, y});
     }
-    void Ellipse::rotate(const Point &center, int &angle) const {
-        center.rotate(center,angle);
+    void Ellipse::rotate(const Point &origin, int &angle) const {
+        center.rotate(origin,angle);
     }
     //circle
     Circle::Circle(const Color &fill,
@@ -74,9 +74,9 @@ namespace svg
             all_points[i].translate({x,y});
         }
     }
-    void Polygon::rotate(const Point pnt, int &angle) const{
+    void Polygon::rotate(const Point &origin, int &angle) const{
         for(int i = 0; i < all_points.size(); i++){
-            all_points[i].rotate(all_points[i],angle);
+            all_points[i].rotate(origin,angle);
         }
     }
 
@@ -95,9 +95,9 @@ namespace svg
         polyl_points[i].translate({x,y});   
         }
     }
-    void Polyline::rotate(const Point pnt, int &angle) const {
+    void Polyline::rotate(const Point &origin, int &angle) const {
         for (int i = 0; i<polyl_points.size() - 1; i++){
-        polyl_points[i].rotate(polyl_points[i],angle);   
+        polyl_points[i].rotate(origin,angle);   
         }
     }
 
