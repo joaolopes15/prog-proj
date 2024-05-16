@@ -106,7 +106,12 @@ namespace svg
                 string fill = child_elem->Attribute("fill");
                 SVGElement* ellipse = new Ellipse(parse_color(fill), {cx, cy}, {rx, ry});
                 svg_elements.push_back(ellipse);
-                }
+            }
+            else if (strcmp(elem_name, "use") == 0){
+                string href = child_elem->Attribute("href");
+                string transform = child_elem->Attribute("transform");
+                string id = child_elem->Attribute("id");
+            }
         }
             child_elem = child_elem->NextSiblingElement();
         } 
