@@ -1,52 +1,20 @@
 >>>> [1] batman <<<<
-SVGElements.cpp:59:40: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
+SVGElements.cpp:59:50: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
 0x606000000080: note: object has invalid vptr
  00 00 00 00  00 00 00 00 00 00 00 00  be be be be be be be be  be be be be be be be be  be be be be
               ^~~~~~~~~~~~~~~~~~~~~~~
               invalid vptr
-SVGElements.cpp:59:51: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
+SVGElements.cpp:60:59: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
 0x606000000080: note: object has invalid vptr
  00 00 00 00  00 00 00 00 00 00 00 00  be be be be be be be be  be be be be be be be be  be be be be
               ^~~~~~~~~~~~~~~~~~~~~~~
               invalid vptr
-SVGElements.cpp:59:49: runtime error: signed integer overflow: -1094795586 + -1094795586 cannot be represented in type 'int'
-SVGElements.cpp:59:58: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
+SVGElements.cpp:61:50: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
 0x606000000080: note: object has invalid vptr
  00 00 00 00  00 00 00 00 00 00 00 00  be be be be be be be be  be be be be be be be be  be be be be
               ^~~~~~~~~~~~~~~~~~~~~~~
               invalid vptr
-SVGElements.cpp:60:40: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
-0x606000000080: note: object has invalid vptr
- 00 00 00 00  00 00 00 00 00 00 00 00  be be be be be be be be  be be be be be be be be  be be be be
-              ^~~~~~~~~~~~~~~~~~~~~~~
-              invalid vptr
-SVGElements.cpp:60:50: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
-0x606000000080: note: object has invalid vptr
- 00 00 00 00  00 00 00 00 00 00 00 00  be be be be be be be be  be be be be be be be be  be be be be
-              ^~~~~~~~~~~~~~~~~~~~~~~
-              invalid vptr
-SVGElements.cpp:60:61: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
-0x606000000080: note: object has invalid vptr
- 00 00 00 00  00 00 00 00 00 00 00 00  be be be be be be be be  be be be be be be be be  be be be be
-              ^~~~~~~~~~~~~~~~~~~~~~~
-              invalid vptr
-SVGElements.cpp:61:40: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
-0x606000000080: note: object has invalid vptr
- 00 00 00 00  00 00 00 00 00 00 00 00  be be be be be be be be  be be be be be be be be  be be be be
-              ^~~~~~~~~~~~~~~~~~~~~~~
-              invalid vptr
-SVGElements.cpp:61:51: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
-0x606000000080: note: object has invalid vptr
- 00 00 00 00  00 00 00 00 00 00 00 00  be be be be be be be be  be be be be be be be be  be be be be
-              ^~~~~~~~~~~~~~~~~~~~~~~
-              invalid vptr
-SVGElements.cpp:61:49: runtime error: signed integer overflow: -1094795586 + -1094795586 cannot be represented in type 'int'
-SVGElements.cpp:61:58: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
-0x606000000080: note: object has invalid vptr
- 00 00 00 00  00 00 00 00 00 00 00 00  be be be be be be be be  be be be be be be be be  be be be be
-              ^~~~~~~~~~~~~~~~~~~~~~~
-              invalid vptr
-SVGElements.cpp:61:69: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
+SVGElements.cpp:61:67: runtime error: member access within address 0x606000000080 which does not point to an object of type 'Rectangle'
 0x606000000080: note: object has invalid vptr
  00 00 00 00  00 00 00 00 00 00 00 00  be be be be be be be be  be be be be be be be be  be be be be
               ^~~~~~~~~~~~~~~~~~~~~~~
