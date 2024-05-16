@@ -54,6 +54,34 @@ namespace svg
             SVGElement *line = new Line({x1, y1}, {x2, y2}, parse_color(stroke));
             svg_elements.push_back(line);
             }
+            else if (strcmp(elem_name, "polyline") == 0)
+            {
+            vector<Point> polyl_points;
+            const char* points_str = child_elem->Attribute("points");
+            //coordinates are separated by "," and points are separated by " "
+            char* point = strtok(const_cast<char*>(points_str), " "); //Splits the string in the first space
+            while (point != nullptr){ 
+                char* x_str = strtok(point, ","); //Splits the (already splitted) string in the first comma
+                char* y_str = strtok(nullptr, ","); 
+                //stoi - string to int 
+                int x = stoi(x_str);
+                int y = stoi(y_str);
+                //store coordinates in the polyl_points vector
+                polyl_points.push_back({x, y});
+                //next point
+                point = strtok(nullptr, " ");
+            }
+                string stroke = child_elem->Attribute("stroke");
+                SVGElement* polyline = new Polyline(polyl_points, parse_color(stroke));
+                svg_elements.push_back(polyline);
+            } //fim do else if polylinha
+            else if (strcmp(elem_name, "polygon") == 0)
+            {
+            }
+            else{
+
+            }
+            
             // Add more conditions for other SVG element types here
 
             child_elem = child_elem->NextSiblingElement();
