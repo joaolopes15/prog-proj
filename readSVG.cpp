@@ -21,9 +21,9 @@ namespace svg
         dimensions.x = xml_elem->IntAttribute("width");
         dimensions.y = xml_elem->IntAttribute("height");
         
-        XMLElement *child_elem = xml_elem->FirstChildElement();
-        while (child_elem != nullptr){
+        for (XMLElement *child_elem = xml_elem->FirstChildElement(); child_elem != nullptr; child_elem = child_elem->NextSiblingElement()){
             const char *elem_name = child_elem->Value();
+            
             if (strcmp(elem_name, "rect") == 0)
             {
             int x = child_elem->IntAttribute("x");
@@ -34,6 +34,7 @@ namespace svg
             SVGElement *rect = new Rectangle({x, y}, width, height, parse_color(fill));
             svg_elements.push_back(rect);
             }
+            
             else if (strcmp(elem_name, "circle") == 0)
             {
             int cx = child_elem->IntAttribute("cx");
@@ -43,6 +44,7 @@ namespace svg
             SVGElement *circle = new Circle(parse_color(fill), {cx, cy}, r);
             svg_elements.push_back(circle);
             }
+            
             else if (strcmp(elem_name, "line") == 0)
             {
             int x1 = child_elem->IntAttribute("x1");
@@ -54,67 +56,89 @@ namespace svg
             svg_elements.push_back(line);
             }
 
+            else if (strcmp(elem_name, "ellipse") == 0){
+            int cx = child_elem->IntAttribute("cx");
+            int cy = child_elem->IntAttribute("cy");
+            int rx = child_elem->IntAttribute("rx");
+            int ry = child_elem->IntAttribute("ry");
+            string fill = child_elem->Attribute("fill");
+            SVGElement* ellipse = new Ellipse(parse_color(fill), {cx, cy}, {rx, ry});
+            svg_elements.push_back(ellipse);
+            }
+            
             else if (strcmp(elem_name, "polyline") == 0)
             {
-                vector<Point> polyl_points;
-                const char* points_str = child_elem->Attribute("points");
-                //coordinates are separated by "," and points are separated by " "
-                char* point = strtok(const_cast<char*>(points_str), " "); //Splits the string in the first space
-                while (point != nullptr){ 
-                    char* x_str = strtok(point, ","); //Splits the (already splitted) string in the first comma
-                    char* y_str = strtok(nullptr, ","); 
-                    //stoi - string to int 
-                    int x = stoi(x_str);
-                    int y = stoi(y_str);
-                    //store coordinates in the polyl_points vector
-                    polyl_points.push_back({x, y});
-                    //next point
-                    point = strtok(nullptr, " ");
-                }
-                    string stroke = child_elem->Attribute("stroke");
-                    SVGElement* polyline = new Polyline(polyl_points, parse_color(stroke));
-                    svg_elements.push_back(polyline);
+            vector<Point> polyl_points;
+            const char* points_str = child_elem->Attribute("points");
+            //coordinates are separated by "," and points are separated by " "
+            char* point = strtok(const_cast<char*>(points_str), " "); //Splits the string in the first space
+            char* x_str = strtok(point, ","); //Splits the (already splitted) string in the first comma
+            char* y_str = strtok(nullptr, ",");
+            //stoi - string to int 
+            int x = stoi(x_str);
+            int y = stoi(y_str);
+            //store coordinates in the polyl_points vector
+            polyl_points.push_back({x, y});
+            //next point
+            point = strtok(nullptr, " ");
+            string stroke = child_elem->Attribute("stroke");
+            SVGElement* polyline = new Polyline(polyl_points, parse_color(stroke));
+            svg_elements.push_back(polyline);
             } 
 
             else if (strcmp(elem_name, "polygon") == 0)
             {
-                vector<Point> all_points;
-                const char* points_str = child_elem->Attribute("points");
-                // coordinates are separated by "," and points are separated by " "
-                char* point = strtok(const_cast<char*>(points_str), " "); // Splits the string in the first space
-                while (point != nullptr)
-                {
-                    char* x_str = strtok(point, ","); // Splits the (already splitted) string in the first comma
-                    char* y_str = strtok(nullptr, ",");
-                    // stoi - string to int
-                    int x = stoi(x_str);
-                    int y = stoi(y_str);
-                    // store coordinates in the all_points vector
-                    all_points.push_back({x, y});
-                    // next point
-                    point = strtok(nullptr, " ");
-                }
-                string fill = child_elem->Attribute("fill");
-                SVGElement* polygon = new Polygon(all_points, parse_color(fill));
-                svg_elements.push_back(polygon);
+            vector<Point> all_points;
+            const char* points_str = child_elem->Attribute("points");
+            // coordinates are separated by "," and points are separated by " "
+            char* point = strtok(const_cast<char*>(points_str), " "); // Splits the string in the first space
+            while (point != nullptr)
+            {
+                char* x_str = strtok(point, ","); // Splits the (already splitted) string in the first comma
+                char* y_str = strtok(nullptr, ",");
+                // stoi - string to int
+                int x = stoi(x_str);
+                int y = stoi(y_str);
+                // store coordinates in the all_points vector
+                all_points.push_back({x, y});
+                // next point
+                point = strtok(nullptr, " ");
             }
-            else if (strcmp(elem_name, "ellipse") == 0){
-                int cx = child_elem->IntAttribute("cx");
-                int cy = child_elem->IntAttribute("cy");
-                int rx = child_elem->IntAttribute("rx");
-                int ry = child_elem->IntAttribute("ry");
-                string fill = child_elem->Attribute("fill");
-                SVGElement* ellipse = new Ellipse(parse_color(fill), {cx, cy}, {rx, ry});
-                svg_elements.push_back(ellipse);
+            string fill = child_elem->Attribute("fill");
+            SVGElement* polygon = new Polygon(all_points, parse_color(fill));
+            svg_elements.push_back(polygon);
             }
+            
             else if (strcmp(elem_name, "use") == 0){
                 string href = child_elem->Attribute("href");
                 string transform = child_elem->Attribute("transform");
                 string id = child_elem->Attribute("id");
             }
-        }
-            child_elem = child_elem->NextSiblingElement();
         } 
-    }
+        /* child_elem = child_elem->NextSiblingElement();
+        class Group : public SVGElement {
+        
+        private:
+        vector<SVGElement*> elements;
+
+        public:
+        Group() {}
+        void addElement(SVGElement* element) {
+            elements.push_back(element);
+        }
+        void draw(PNGImage &img) const override {
+            for (const auto& element : elements) {
+                element->draw(img);
+            }
+        }
+        ~Group() {
+            for (const auto& element : elements) {
+                delete element;
+            }
+        }
+    }; */ 
+    
+    } 
+}
 
 
