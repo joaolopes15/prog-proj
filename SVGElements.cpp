@@ -56,9 +56,9 @@ namespace svg
     std::vector<Point> Rectangle::get_rect_coordinates(Point point, const int &w ,const int &h) const {
         std::vector<Point> all_rect_points;
         all_rect_points.push_back(point);                                 // Upper Left
-        all_rect_points.push_back({(point.x + w), point.y});          // Upper Right
-        all_rect_points.push_back({point.x, (point.y - h)});         // Lower Left
-        all_rect_points.push_back({(point.x + w), (point.y - h)}); // Lower Right
+        all_rect_points.push_back({(point.x + w-1), point.y});          // Upper Right
+        all_rect_points.push_back({point.x, (point.y + h-1)});         // Lower Left
+        all_rect_points.push_back({(point.x + w-1), (point.y + h-1)}); // Lower Right
         return all_rect_points;
     }
     // ############################################################################################################
