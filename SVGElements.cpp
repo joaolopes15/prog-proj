@@ -103,7 +103,6 @@ namespace svg
         }
     }
 
-
     //Linha (LM)
     Line::Line(const Point &start, const Point &end, const Color &stroke)
         :Polyline({start,end},stroke),
