@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "SVGElements.hpp"
 #include "external/tinyxml2/tinyxml2.h"
 #include "Color.hpp"
@@ -7,6 +8,18 @@ using namespace tinyxml2;
 
 namespace svg
 {
+
+    void comma_remover(string &old_str)
+    {
+        for (char &c : old_str)
+        {
+            if (c == ',')
+            {
+                c = ' ';
+            }
+        }
+    }
+
     void readSVG(const string& svg_file, Point& dimensions, vector<SVGElement *>& svg_elements)
     {
         XMLDocument doc;
@@ -68,7 +81,15 @@ namespace svg
             else if (strcmp(elem_name, "polyline") == 0)
             {
             vector<Point> polyl_points;
-            const char* points_str = child_elem->Attribute("points");
+            string points_str = child_elem->Attribute("points");
+            comma_remover(points_str);
+            std::istringstream str_ss(points_str);
+            Point temp;
+            while (str_ss >> temp.x) {
+                str_ss >> temp.y;
+                polyl_points.push_back(temp);
+            }
+            /*const char* points_str = child_elem->Attribute("points");
             //coordinates are separated by "," and points are separated by " "
             char* point = strtok(const_cast<char*>(points_str), " "); //Splits the string in the first space
             char* x_str = strtok(point, ","); //Splits the (already splitted) string in the first comma
@@ -79,7 +100,7 @@ namespace svg
             //store coordinates in the polyl_points vector
             polyl_points.push_back({x, y});
             //next point
-            point = strtok(nullptr, " ");
+            point = strtok(nullptr, " ");*/
             string stroke = child_elem->Attribute("stroke");
             SVGElement* polyline = new Polyline(polyl_points, parse_color(stroke));
             svg_elements.push_back(polyline);
@@ -88,9 +109,16 @@ namespace svg
             else if (strcmp(elem_name, "polygon") == 0)
             {
             vector<Point> all_points;
-            const char* points_str = child_elem->Attribute("points");
+            string points_str = child_elem->Attribute("points");
+            comma_remover(points_str);
+            std::istringstream str_ss(points_str);
+            Point temp;
+            while (str_ss >> temp.x) {
+                str_ss >> temp.y;
+                all_points.push_back(temp);
+            }
             // coordinates are separated by "," and points are separated by " "
-            char* point = strtok(const_cast<char*>(points_str), " "); // Splits the string in the first space
+            /* char* point = strtok(const_cast<char*>(points_str), " "); // Splits the string in the first space
             while (point != nullptr)
             {
                 char* x_str = strtok(point, ","); // Splits the (already splitted) string in the first comma
@@ -102,7 +130,7 @@ namespace svg
                 all_points.push_back({x, y});
                 // next point
                 point = strtok(nullptr, " ");
-            }
+            } */
             string fill = child_elem->Attribute("fill");
             SVGElement* polygon = new Polygon(all_points, parse_color(fill));
             svg_elements.push_back(polygon);

@@ -35,7 +35,7 @@ namespace svg
     }
     void Circle::draw(PNGImage &img) const
     {
-        img.draw_ellipse(center, {radius, radius}, fill);
+        img.draw_ellipse(center, radius, fill);
     }
     // ############################################################################################################
     //  @todo provide the implementation of SVGElement derived classes
@@ -46,7 +46,7 @@ namespace svg
                          const int &height,
                          const Color &fill)
                 : Polygon(get_rect_coordinates(upperL,width,height), fill),
-          fill(fill), width(width), height(height), upperL(upperL)
+           width(width), height(height), upperL(upperL)
     {
     }
     void Rectangle::draw(PNGImage &img) const {
@@ -106,7 +106,7 @@ namespace svg
     //Linha (LM)
     Line::Line(const Point &start, const Point &end, const Color &stroke)
         :Polyline({start,end},stroke),
-        start(start),end(end),stroke(stroke)
+        start(start),end(end)
     {
     }
     void Line::draw(PNGImage &img) const {

@@ -37,7 +37,7 @@ namespace svg
         void rotate(const Point &origin, int &angle) const;
         void scale(const Point &origin, int &factor) const;
 
-    private:
+    protected:
         Color fill;
         Point center;
         Point radius;
@@ -48,11 +48,6 @@ namespace svg
     public:
         Circle(const Color &fill, const Point &center, const int &radius);
         void draw(PNGImage &img) const override;
-
-    private:
-        Color fill;
-        Point center;
-        int radius;
     };
 
     // Implementação da classe Polygon (LM)
@@ -65,7 +60,7 @@ namespace svg
         void rotate(const Point &origin, int &angle) const;
         void scale(const Point &origin, int &factor) const;
 
-    private:
+    protected:
         Color fill;
         std::vector<Point> all_points;
     };
@@ -82,7 +77,6 @@ namespace svg
         std::vector<Point> get_rect_coordinates(Point point, const int &w, const int &h) const;
 
     private:
-        Color fill;
         int width;
         int height;
         Point upperL;
@@ -102,7 +96,7 @@ namespace svg
         //drawn in PNG format with a thickness of 1 pixel. 
         // I think this means no scale function for lines and polylines, right? :D
         
-    private:
+    protected:
         std::vector<Point> polyl_points;
         Color stroke;
     };
@@ -116,7 +110,7 @@ namespace svg
     private:
         Point start;
         Point end;
-        Color stroke;
+        
     };
 };
 #endif
