@@ -43,10 +43,37 @@ namespace svg
         int scale = 1;
         int originX = 0;
         int originY = 0;
-        
+
         const char *p = elem->Attribute("transform");
-        if (p.substr(0, 9) == "translate"){
-            
+        if (p != nullptr)
+        {
+            string transform_str = p;
+            comma_remover(transform_str);
+
+            if (translate(transform_str))
+            {
+                // Extract translation values
+                int pos1 = transform_str.find('(') + 1;
+                int pos2 = transform_str.find(',');
+                translationX = stoi(transform_str.substr(pos1, pos2 - pos1));
+                pos1 = pos2 + 1;
+                pos2 = transform_str.find(')');
+                translationY = stoi(transform_str.substr(pos1, pos2 - pos1));
+            }
+            else if (rotate(transform_str))
+            {
+                // Extract rotation value
+                int pos1 = transform_str.find('(') + 1;
+                int pos2 = transform_str.find(')');
+                rotation = stoi(transform_str.substr(pos1, pos2 - pos1));
+            }
+            /* else if (scale(transform_str))
+            {
+                // Extract scale value
+                int pos1 = transform_str.find('(') + 1;
+                int pos2 = transform_str.find(')');
+                scale = stoi(transform_str.substr(pos1, pos2 - pos1));
+            } */
         }
         return Transformation{Point{translationX, translationY}, rotation, scale, Point{originX, originY}};
     }
@@ -197,6 +224,62 @@ namespace svg
                 string ref_id = href.substr(1);
             }
         }
+        XMLElement* gElement = doc.FirstChildElement("svg")->FirstChildElement("g");
+        if (gElement != nullptr) {
+        // Access the attributes
+        XMLElement* child_elem = gElement->FirstChildElement();
+        while (child_elem != nullptr) {
+            const char* elem_name = child_elem->Name();
+            if (strcmp(elem_name, "rect") == 0) {
+                // code for rect
+            } else if (strcmp(elem_name, "circle") == 0) {
+                int cx = child_elem->IntAttribute("cx");
+                int cy = child_elem->IntAttribute("cy");
+                int r = child_elem->IntAttribute("r");
+                string fill = child_elem->Attribute("fill");
+                SVGElement *circle = new Circle(parse_color(fill), {cx, cy}, r);
+                svg_elements.push_back(circle);   
+            } else if (strcmp(elem_name, "ellipse") == 0) {
+                int cx = child_elem->IntAttribute("cx");
+                int cy = child_elem->IntAttribute("cy");
+                int rx = child_elem->IntAttribute("rx");
+                int ry = child_elem->IntAttribute("ry");
+                string fill = child_elem->Attribute("fill");
+                SVGElement* ellipse = new Ellipse(parse_color(fill), {cx, cy}, {rx, ry});
+                svg_elements.push_back(ellipse);
+            } else if (strcmp(elem_name, "line") == 0) {
+                int x1 = child_elem->IntAttribute("x1");
+                int y1 = child_elem->IntAttribute("y1");
+                int x2 = child_elem->IntAttribute("x2");
+                int y2 = child_elem->IntAttribute("y2");
+                string stroke = child_elem->Attribute("stroke");
+                SVGElement *line = new Line({x1, y1}, {x2, y2}, parse_color(stroke));
+                svg_elements.push_back(line);
+            } else if (strcmp(elem_name, "polyline") == 0) {
+                vector<Point> polyl_points;
+                string points_str = child_elem->Attribute("points");
+                comma_remover(points_str);
+                std::istringstream str_ss(points_str);
+                Point temp;
+                while (str_ss >> temp.x) {
+                    str_ss >> temp.y;
+                    polyl_points.push_back(temp);
+                }    
+            } else if (strcmp(elem_name, "polygon") == 0) {
+                vector<Point> all_points;
+                string points_str = child_elem->Attribute("points");
+                comma_remover(points_str);
+                std::istringstream str_ss(points_str);
+                Point temp;
+                while (str_ss >> temp.x) {
+                    str_ss >> temp.y;
+                    all_points.push_back(temp);
+                }
+            } else if (strcmp(elem_name, "use") == 0) {
+                // code for use
+            }
+            child_elem = child_elem->NextSiblingElement();
+        }
         /* child_elem = child_elem->NextSiblingElement();
         class Group : public SVGElement {
 
@@ -219,5 +302,7 @@ namespace svg
             }
         }
     }; */
+
     }
+}
 }
