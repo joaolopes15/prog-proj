@@ -1,3 +1,8 @@
+/**
+ * @file readSVG.cpp
+ * @brief Implementation of the readSVG function and related helper functions for parsing SVG files.
+ */
+
 #include <iostream>
 #include <sstream>
 #include "SVGElements.hpp"
@@ -10,8 +15,12 @@ using namespace tinyxml2;
 namespace svg
 {
 
+    /**
+     * @brief Removes commas from a string.
+     * 
+     * @param old_str The string to remove commas from.
+     */
     void comma_remover(string &old_str)
-
     {
         for (char &c : old_str)
         {
@@ -22,23 +31,54 @@ namespace svg
         }
     }
 
+    /**
+     * @brief Checks if a transformation string represents a translate transformation.
+     * 
+     * @param translate The transformation string to check.
+     * @return true if the string represents a translate transformation, false otherwise.
+     */
     bool translate(const string& translate){
         return translate.substr(0, 9) == "translate";
     }
 
+    /**
+     * @brief Checks if a transformation string represents a rotate transformation.
+     * 
+     * @param rotate The transformation string to check.
+     * @return true if the string represents a rotate transformation, false otherwise.
+     */
     bool rotate(const string& rotate){
         return rotate.substr(0, 6) == "rotate";
     }
 
+    /**
+     * @brief Checks if a transformation string represents a scale transformation.
+     * 
+     * @param scale The transformation string to check.
+     * @return true if the string represents a scale transformation, false otherwise.
+     */
     bool scale(const string& scale){
         return scale.substr(0, 5) == "scale";
     }
+
+    /**
+     * @brief Applies a series of transformations (stored in a vector) to an SVG element.
+     * 
+     * @param t_vector The vector of transformations to apply.
+     * @param svg_elem The SVG element trasnform.
+     */
     void iterating_tranformations(vector<Transformation> t_vector, SVGElement* svg_elem){
         for (long unsigned int i = 0; i< t_vector.size(); i++){
             svg_elem->transform(t_vector[i]);
         }
     }
 
+    /**
+     * @brief Parses the transformation attributes of an XML element and returns a Transformation object (regardless of having a transformation or not).
+     * 
+     * @param elem The XML element to parse.
+     * @return The Transformation object.
+     */
     Transformation getTransformation(const XMLElement *elem)
     {
         int translationX = 0;
@@ -87,6 +127,14 @@ namespace svg
         }
         return Transformation{Point{translationX, translationY}, rotation, s_factor, Point{originX, originY}};
     }
+
+    /**
+     * @brief Creates SVG elements from XML elements recursively.
+     * 
+     * @param xml_elem The XML element to create SVG elements from.
+     * @param svg_elements The vector to store the created SVG elements.
+     * @param t_vector The vector of transformations to apply to the SVG elements.
+     */
     void create_elems(XMLElement* xml_elem, vector<SVGElement *> &svg_elements, vector<Transformation> &t_vector){
         for (XMLElement *child_elem = xml_elem->FirstChildElement(); child_elem != nullptr; child_elem = child_elem->NextSiblingElement())
         {
@@ -201,6 +249,14 @@ namespace svg
             }
         }
     }
+
+    /**
+     * @brief Reads an SVG file and creates SVG elements from it.
+     * 
+     * @param svg_file The path to the SVG file to read.
+     * @param dimensions The dimensions of the SVG file.
+     * @param svg_elements The vector to store the created SVG elements.
+     */
     void readSVG(const string &svg_file, Point &dimensions, vector<SVGElement *> &svg_elements)
     {
         XMLDocument doc;
