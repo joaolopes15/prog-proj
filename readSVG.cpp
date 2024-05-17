@@ -40,7 +40,7 @@ namespace svg
         int translationX = 0;
         int translationY = 0;
         int rotation = 0;
-        int scale = 1;
+        int s_factor = 1;
         int originX = 0;
         int originY = 0;
 
@@ -54,7 +54,7 @@ namespace svg
             {
                 // Extract translation values
                 int pos1 = transform_str.find('(') + 1;
-                int pos2 = transform_str.find(',');
+                int pos2 = transform_str.find(' ');
                 translationX = stoi(transform_str.substr(pos1, pos2 - pos1));
                 pos1 = pos2 + 1;
                 pos2 = transform_str.find(')');
@@ -67,15 +67,14 @@ namespace svg
                 int pos2 = transform_str.find(')');
                 rotation = stoi(transform_str.substr(pos1, pos2 - pos1));
             }
-            /* else if (scale(transform_str))
+            else if(scale(transform_str))
             {
-                // Extract scale value
                 int pos1 = transform_str.find('(') + 1;
                 int pos2 = transform_str.find(')');
-                scale = stoi(transform_str.substr(pos1, pos2 - pos1));
-            } */
+                s_factor = stoi(transform_str.substr(pos1, pos2 - pos1));
+            }
         }
-        return Transformation{Point{translationX, translationY}, rotation, scale, Point{originX, originY}};
+        return Transformation{Point{translationX, translationY}, rotation, s_factor, Point{originX, originY}};
     }
 
     void readSVG(const string &svg_file, Point &dimensions, vector<SVGElement *> &svg_elements)
