@@ -97,5 +97,5 @@ namespace svg
     public:
         Line(const Point &start, const Point &end, const Color &stroke);
     };
-};
+}
 #endif
