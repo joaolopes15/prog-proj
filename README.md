@@ -3,15 +3,26 @@
 
 ## Group elements
 
-Identify all group elements (numbers and names).
-
-- upXXXXX Name of element 1
-- upXXXXX Name of element 2
-- upXXXXX Name of element 3
-
+- up202307809 João Miguel Lopes
+- up202303772 Leonor Alexandra Grilo Matias
 
 ## Accomplished tasks
 
-Brief summary of what you implemented.
+SVGElements.cpp:
+
+- this file implements classes that construct an ellipse, circle, rectangle, polygon, polyline and line objects, transforms and draws them in the png image.
+
+SVGElements.hpp:
+
+- this file implements classes and functions that construct an ellipse, circle, rectangle, polygon, polyline and line objects, transforms and draws them in the png image.
+
+readSVG.cpp
+
+- this file implements logic
+
+
+    
+
+
 
 
