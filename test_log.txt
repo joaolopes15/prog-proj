@@ -32,39 +32,27 @@ pixel (36 80): expected 255 0 0 got 255 255 255
 >>>> [26] rect_3 <<<<
 >>>> [27] rotate_circle <<<<
 >>>> [28] rotate_circle_with_origin <<<<
-test: PNGImage.cpp:62: svg::Color& svg::PNGImage::at(int, int): Assertion `x >= 0 && x < width_' failed.
 >>>> [29] rotate_line <<<<
 >>>> [30] rotate_line_with_origin <<<<
-test: PNGImage.cpp:62: svg::Color& svg::PNGImage::at(int, int): Assertion `x >= 0 && x < width_' failed.
 >>>> [31] rotate_polygon <<<<
 >>>> [32] rotate_polygon_with_origin <<<<
-test: PNGImage.cpp:62: svg::Color& svg::PNGImage::at(int, int): Assertion `x >= 0 && x < width_' failed.
 >>>> [33] rotate_polyline <<<<
 >>>> [34] rotate_polyline_with_origin <<<<
-test: PNGImage.cpp:63: svg::Color& svg::PNGImage::at(int, int): Assertion `y >= 0 && y < height_' failed.
 >>>> [35] rotate_rect <<<<
 >>>> [36] rotate_rect_with_origin <<<<
-test: PNGImage.cpp:62: svg::Color& svg::PNGImage::at(int, int): Assertion `x >= 0 && x < width_' failed.
 >>>> [37] scale_circle <<<<
 >>>> [38] scale_circle_with_origin <<<<
-test: PNGImage.cpp:62: svg::Color& svg::PNGImage::at(int, int): Assertion `x >= 0 && x < width_' failed.
 >>>> [39] scale_ellipse <<<<
 >>>> [40] scale_ellipse_with_origin <<<<
-test: PNGImage.cpp:62: svg::Color& svg::PNGImage::at(int, int): Assertion `x >= 0 && x < width_' failed.
 >>>> [41] scale_line <<<<
 >>>> [42] scale_line_with_origin <<<<
-test: PNGImage.cpp:63: svg::Color& svg::PNGImage::at(int, int): Assertion `y >= 0 && y < height_' failed.
 >>>> [43] scale_polygon <<<<
 >>>> [44] scale_polygon_with_origin <<<<
-test: PNGImage.cpp:62: svg::Color& svg::PNGImage::at(int, int): Assertion `x >= 0 && x < width_' failed.
 >>>> [45] scale_polyline <<<<
 >>>> [46] scale_polyline_with_origin <<<<
-test: PNGImage.cpp:62: svg::Color& svg::PNGImage::at(int, int): Assertion `x >= 0 && x < width_' failed.
 >>>> [47] scale_rect <<<<
 >>>> [48] scale_rect_with_origin <<<<
-test: PNGImage.cpp:62: svg::Color& svg::PNGImage::at(int, int): Assertion `x >= 0 && x < width_' failed.
 >>>> [49] transform_several <<<<
-test: PNGImage.cpp:62: svg::Color& svg::PNGImage::at(int, int): Assertion `x >= 0 && x < width_' failed.
 >>>> [50] translate_circle <<<<
 >>>> [51] translate_ellipse <<<<
 >>>> [52] translate_line <<<<

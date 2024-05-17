@@ -22,15 +22,14 @@ namespace svg
         }
     }
 
-    // Verifica se a string de transformação representa uma translação.
     bool translate(const string& translate){
         return translate.substr(0, 9) == "translate";
     }
-    // Verifica se a string de transformação representa uma rotação.
+
     bool rotate(const string& rotate){
         return rotate.substr(0, 6) == "rotate";
     }
-    // Verifica se a string de transformação representa uma escala.
+
     bool scale(const string& scale){
         return scale.substr(0, 5) == "scale";
     }
@@ -45,8 +44,14 @@ namespace svg
         int originY = 0;
 
         const char *p = elem->Attribute("transform");
-        if (p != nullptr)
-        {
+        if (p != nullptr){   
+            const char *trans_point = elem->Attribute("transform-origin"); 
+            if (trans_point != nullptr)                                    
+            {
+                istringstream ss(trans_point); 
+                ss >> originX >> originY;
+            }
+            
             string transform_str = p;
             comma_remover(transform_str);
 
