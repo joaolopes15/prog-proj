@@ -45,21 +45,21 @@ namespace svg
                          const int &width,
                          const int &height,
                          const Color &fill)
-                : Polygon(get_rect_coordinates(), fill),
+                : Polygon(get_rect_coordinates(upperL,width,height), fill),
           fill(fill), width(width), height(height), upperL(upperL)
     {
     }
     void Rectangle::draw(PNGImage &img) const {
-            std::vector<Point> rectPoints = get_rect_coordinates();
+            std::vector<Point> rectPoints = get_rect_coordinates(upperL, width, height);
             img.draw_polygon(rectPoints, fill);   
     }
-    std::vector<Point> Rectangle::get_rect_coordinates() const {
-            std::vector<Point> all_rect_points;
-            all_rect_points.push_back(upperL);                                 // Upper Left
-            all_rect_points.push_back({upperL.x + width, upperL.y});          // Upper Right
-            all_rect_points.push_back({upperL.x, upperL.y - height});         // Lower Left
-            all_rect_points.push_back({upperL.x + width, upperL.y - height}); // Lower Right
-            return all_rect_points;
+    std::vector<Point> Rectangle::get_rect_coordinates(Point point, const int &w ,const int &h) const {
+        std::vector<Point> all_rect_points;
+        all_rect_points.push_back(point);                                 // Upper Left
+        all_rect_points.push_back({(point.x + w), point.y});          // Upper Right
+        all_rect_points.push_back({point.x, (point.y - h)});         // Lower Left
+        all_rect_points.push_back({(point.x + w), (point.y - h)}); // Lower Right
+        return all_rect_points;
     }
     // ############################################################################################################
     // Polígono (LM)

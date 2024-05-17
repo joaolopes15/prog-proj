@@ -113,6 +113,7 @@ namespace svg
                 string href = child_elem->Attribute("href");
                 string transform = child_elem->Attribute("transform");
                 string id = child_elem->Attribute("id");
+                string ref_id = href.substr(1);
             }
         } 
         /* child_elem = child_elem->NextSiblingElement();
